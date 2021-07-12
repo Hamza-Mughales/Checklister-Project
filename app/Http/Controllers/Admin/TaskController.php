@@ -6,16 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTaskRequest;
 use App\Models\Checklist;
 use App\Models\Task;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Contracts\View\View;
 
 class TaskController extends Controller
 {
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreTaskRequest $request, Checklist $checklist)
+    public function store(StoreTaskRequest $request, Checklist $checklist): RedirectResponse
     {
         $position = $checklist->tasks()->max('position') + 1;
         $checklist->tasks()->create($request->validated() + ['position' => $position]);
@@ -24,25 +20,12 @@ class TaskController extends Controller
     [$checklist->checklist_group_id, $checklist]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Checklist $checklist, Task $task)
+    public function edit(Checklist $checklist, Task $task): View
     {
         return view('admin.tasks.edit', compact('checklist', 'task'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(StoreTaskRequest $request, Checklist $checklist, Task $task)
+    public function update(StoreTaskRequest $request, Checklist $checklist, Task $task): RedirectResponse
     {
         $task->update($request->validated());
 
@@ -50,13 +33,7 @@ class TaskController extends Controller
         [$checklist->checklist_group_id, $checklist]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Checklist $checklist, Task $task )
+    public function destroy(Checklist $checklist, Task $task ): RedirectResponse
     {
         $checklist->tasks()->where('position', '>', $task->position)
             ->update(['position' => \DB::raw('position - 1') ]);

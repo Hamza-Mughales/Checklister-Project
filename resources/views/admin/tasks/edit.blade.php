@@ -31,7 +31,7 @@
                                         </div>
                                         <div class="form-group row">
                                             <label for="description" class=" col-md-2">{{ __('Description') }}</label>
-                                            <textarea class="form-control col-md-8" name="description" row="5">
+                                            <textarea class="form-control col-md-8" name="description" row="5" id="task-textarea">
                                                 {{ $task->description }}</textarea>
                                         </div>
                                     </div>
@@ -48,4 +48,15 @@
             </div>
         </div>
     </div>
+@endsection
+
+{{-- Add The Editor - CKEditor --}}
+@section('scripts')
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#task-textarea' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
 @endsection

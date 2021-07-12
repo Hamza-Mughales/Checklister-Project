@@ -5,6 +5,7 @@
         <div class="fade-in">
             <div class="row">
                 <div class="col">
+
                     <div class="card">
                         {{-- Edit Checklist Form Validation --}}
                         @if ($errors->any())
@@ -40,6 +41,7 @@
                             </div>
                         </form>
                     </div>
+
                     <form action="{{ route('admin.checklist_groups.checklists.destroy', [$checklistGroup, $checklist]) }}"
                         method="POST">
                         @csrf
@@ -83,7 +85,7 @@
                                         </div>
                                         <div class="form-group row">
                                             <label for="description" class="col-md-2">{{ __('Description') }}</label>
-                                            <textarea class="form-control col-md-8" name="description" rows="5">
+                                            <textarea class="form-control col-md-8" name="description" rows="5" id="task-textarea">
                                                 {{ old('description') }}</textarea>
                                         </div>
                                     </div>
@@ -99,4 +101,19 @@
             </div>
         </div>
     </div>
+@endsection
+
+{{-- Add The Editor - CKEditor --}}
+@section('scripts')
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#task-textarea' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+
+
+
+
 @endsection

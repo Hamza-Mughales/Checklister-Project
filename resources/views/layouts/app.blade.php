@@ -111,10 +111,18 @@
         <script src="{{ asset('js/perfect-scrollbar.main.js') }}"></script>
         <script src="{{ asset('js/popper.js') }}"></script>
         <script src="{{ asset('js/coreui-main.js') }}"></script>
+
+        {{-- Adding the CKEditor --}}
+        <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
+        {{-- <script src="{{ asset('js/ckeditor.js') }}"></script> --}}
+
         {{-- Livewirescripts --}}
         @livewireScripts
         <script src="https://cdn.jsdelivr.net/gh/livewire/sortable@v0.x.x/dist/livewire-sortable.js"></script>
         {{-- <script src="{{ asset('js/livewire-sortable.js') }}"></script> --}}
+
+    @yield('scripts')
+
 </body>
 
 </html>

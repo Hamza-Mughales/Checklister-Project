@@ -5,6 +5,7 @@
                 <tr wire:sortable.item="{{ $task->id }}" wire:key="task-{{ $task->id }}"
                     style="cursor: move">
                     <td>{{ $task->name }}</td>
+                    <td>{!! $task->description !!}</td>
                     <td>
                         <a class="btn btn-sm btn-success"
                             href="{{ route('admin.checklists.tasks.edit', [$checklist, $task]) }}">{{ __('Edit') }}</a>
